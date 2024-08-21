@@ -1,0 +1,76 @@
+# This CI job is adapted from:
+# build-and-inspect-python-package (2024-03-25), MIT license
+# Ref: https://github.com/hynek/build-and-inspect-python-package/blob/v2.2.1/.github/workflows/update-dependencies.yml
+
+# Note: This is a reusable workflow.
+#
+# Usage: Use the workflow in calling workflows like this:
+#   "uses: afuetterer/.github/.github/workflows/_upgrade-requirements.yml@main"
+# Pin it to a branch, tag or commit hash.
+#
+# Ref: https://docs.github.com/en/actions/using-workflows/reusing-workflows
+
+name: Upgrade requirements
+
+on:
+  workflow_call:
+
+# Set permissions at the job level.
+permissions: {}
+
+jobs:
+  upgrade:
+    permissions:
+      contents: write # for peter-evans/create-pull-request to create branch
+      pull-requests: write # for peter-evans/create-pull-request to create a PR
+    name: Upgrade requirements
+    runs-on: ubuntu-24.04
+    steps:
+    - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+    - name: Set up Python 3.10 and 3.12
+      uses: actions/setup-python@39cd14951b08e74b54015e9e001cdefcf80e669f # v5.1.1
+      with:
+        python-version: |
+          3.10
+          3.12
+        cache: pip
+    - run: |
+        python3.10 --version
+        python3.12 --version
+    - name: Install pre-requisites (e.g. hatch)
+      run: python -m pip install --require-hashes --requirement=requirements/ci
+    - name: Upgrade ci requirements (using Python 3.10 for compatibility)
+      run: |
+        rm requirements/ci
+        HATCH_PYTHON=3.10 hatch env run --env ci -- python --version
+    - name: Upgrade docs requirements (using Python 3.12)
+      run: |
+        rm requirements/docs
+        HATCH_PYTHON=3.12 hatch env run --env docs -- python --version
+      # Ref: https://github.com/peter-evans/create-pull-request
+    - uses: peter-evans/create-pull-request@c5a7806660adbe173f04e3e038b0ccdcd758773c # v6.1.0
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: requirement-upgrades
+        committer: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+        author: github-actions[bot] <41898282+github-actions[bot]@users.noreply.github.com>
+        title: 'build(deps-dev): upgrade ci and docs requirements'
+        commit-message: 'build(deps-dev): upgrade ci and docs requirements'
+        body: |
+          Monthly scheduled CI and docs requirements upgrade (`hatch-pip-compile --upgrade --all`).
+
+          ```
+          hatch env run --env ci -- python --version
+          hatch env run --env docs -- python --version
+          ```
+
+          > [!NOTE]
+          > Mark this PR as "ready for review" to trigger additional checks.
+        add-paths: |
+          requirements/ci
+          requirements/docs
+        labels: |
+          type: build
+          deps: python
+        delete-branch: true
+        draft: true
