@@ -1,0 +1,39 @@
+# Note: This is a reusable workflow.
+#
+# Usage: Use the workflow in calling workflows like this:
+#   "uses: afuetterer/.github/.github/workflows/_stale.yml@main"
+# Pin it to a branch, tag or commit hash.
+#
+# Ref: https://docs.github.com/en/actions/using-workflows/reusing-workflows
+
+# Ref: https://github.com/actions/stale
+name: Handle stale issues and PRs
+
+on:
+  workflow_call:
+
+# Set permissions at the job level.
+permissions: {}
+
+jobs:
+  stale:
+    runs-on: ubuntu-24.04
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+    - uses: actions/stale@28ca1036281a5e5922ead5184a1bbf96e5fc984e # v9.0.0
+      with:
+        days-before-stale: 90
+        # handle issues: set to abandoned, close after 14 days with message
+        days-before-issue-close: 14
+        stale-issue-label: 'status: abandoned'
+        stale-issue-message: |
+          This issue is stale because it has been open 90 days without activity.
+          Remove 'abandoned' label or comment or this will be closed in 14 days.
+        close-issue-message: This issue was closed because it has been stalled for 14 days with no activity.
+
+        # handle pull requests: set to abandoned, but do not close per bot
+        days-before-pr-close: -1 # never close PRs
+        stale-pr-label: 'status: abandoned'
+        stale-pr-message: This PR is stale because it has been open 90 days without activity.
