@@ -30,7 +30,7 @@ repos:
     args: [--autofix, --indent, '2']
 
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: a20fe80ebdd4aec6791598c9ff559985580f91ea  # frozen: 0.31.1
+  rev: 06e4cc849d03f3a59ca223a4046f4bb5bb2aba6d  # frozen: 0.33.0
   hooks:
   - id: check-dependabot
   - id: check-github-workflows
@@ -43,7 +43,7 @@ repos:
     exclude: .github/PULL_REQUEST_TEMPLATE.md
 
 - repo: https://github.com/crate-ci/typos
-  rev: e59f226fadcb05a1440bd8b35ee994a9d21bf03b  # frozen: typos-dict-v0.12.4
+  rev: 09ff140a597dff1bd317c87564989d22a8f97bdb  # frozen: v1
   hooks:
   - id: typos
     args: [--force-exclude]
