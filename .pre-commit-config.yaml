@@ -15,7 +15,7 @@ repos:
   - id: check-hooks-apply
 
 - repo: https://github.com/pre-commit/pre-commit-hooks
-  rev: cef0300fd0fc4d2a87a85fa2093c6b283ea36f4b  # frozen: v5.0.0
+  rev: 3e8a8703264a2f4a69428a0aa4dcb512790b2c8c  # frozen: v6.0.0
   hooks:
   - id: check-merge-conflict
   - id: check-case-conflict
@@ -30,20 +30,20 @@ repos:
     args: [--autofix, --indent, '2']
 
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 54da05914997e6b04e4db33ed6757d744984c68b  # frozen: 0.33.2
+  rev: 83b816d020105076daac266dbf6bfed199a2da93  # frozen: 0.34.1
   hooks:
   - id: check-dependabot
   - id: check-github-workflows
 
 - repo: https://github.com/hukkin/mdformat
-  rev: ff29be1a1ba8029d9375882aa2c812b62112a593  # frozen: 0.7.22
+  rev: 2d496dbc18e31b83a1596685347ffe0b6041daf0  # frozen: 1.0.0
   hooks:
   - id: mdformat
     args: [--wrap=120]
     exclude: .github/PULL_REQUEST_TEMPLATE.md
 
 - repo: https://github.com/crate-ci/typos
-  rev: 3d97dc5b9833a60a62e70d5b56af2cc7ddd522f6  # frozen: v1
+  rev: b04a3e939a8f2800a1dc330d7e569e7557879d41  # frozen: v1
   hooks:
   - id: typos
     args: [--force-exclude]
