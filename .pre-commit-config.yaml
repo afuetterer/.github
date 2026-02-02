@@ -24,13 +24,13 @@ repos:
   - id: trailing-whitespace
 
 - repo: https://github.com/macisamuele/language-formatters-pre-commit-hooks
-  rev: 19b28a9f0a0102b30776f054bea4176e7af50dbe  # frozen: v2.15.0
+  rev: 4380fbb73a154b5f5624794c1c78d9719ccc860f  # frozen: v2.16.0
   hooks:
   - id: pretty-format-yaml
     args: [--autofix, --indent, '2']
 
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: 83b816d020105076daac266dbf6bfed199a2da93  # frozen: 0.34.1
+  rev: ccf21790019848af3eb4464be2a9d5efed6358f3  # frozen: 0.36.1
   hooks:
   - id: check-dependabot
   - id: check-github-workflows
@@ -43,7 +43,7 @@ repos:
     exclude: .github/PULL_REQUEST_TEMPLATE.md
 
 - repo: https://github.com/crate-ci/typos
-  rev: b04a3e939a8f2800a1dc330d7e569e7557879d41  # frozen: v1
+  rev: 672d45b4e77223b8fcf1b4b8560bf987f0839902  # frozen: v1
   hooks:
   - id: typos
     args: [--force-exclude]
