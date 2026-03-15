@@ -27,7 +27,7 @@ repos:
   rev: 4380fbb73a154b5f5624794c1c78d9719ccc860f  # frozen: v2.16.0
   hooks:
   - id: pretty-format-yaml
-    args: [--autofix, --indent, '2']
+    args: [--autofix, --indent=2]
 
 - repo: https://github.com/python-jsonschema/check-jsonschema
   rev: 8db279a37c552206d2df62269ff6f9d31125815a  # frozen: 0.37.0
@@ -35,11 +35,13 @@ repos:
   - id: check-dependabot
   - id: check-github-workflows
 
-- repo: https://github.com/hukkin/mdformat
-  rev: 2d496dbc18e31b83a1596685347ffe0b6041daf0  # frozen: 1.0.0
+- repo: https://github.com/rvben/rumdl-pre-commit
+  rev: e710d20e4655af46714a97b41810e70493771c24  # frozen: v0.1.51
   hooks:
-  - id: mdformat
-    args: [--wrap=120]
+  - id: rumdl-fmt
+    args:
+    - --flavor=gfm    # GitHub Flavored Markdown
+    - --disable=MD013 # line length
     exclude: .github/PULL_REQUEST_TEMPLATE.md
 
 - repo: https://github.com/crate-ci/typos
