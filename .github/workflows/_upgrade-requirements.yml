@@ -15,6 +15,9 @@ name: Upgrade requirements
 on:
   workflow_call:
 
+env:
+  UV_EXCLUDE_NEWER: 1 week # ignore packages published in the last week
+
 # Set permissions at the job level.
 permissions: {}
 
@@ -32,7 +35,7 @@ jobs:
         python-version: '3.14'
         enable-cache: true
         prune-cache: false
-    - run: uv lock --upgrade --exclude-newer="1 week"
+    - run: uv lock --upgrade
       # Ref: https://github.com/peter-evans/create-pull-request
     - uses: peter-evans/create-pull-request@c0f553fe549906ede9cf27b5156039d195d2ece0 # v8.1.0
       with:
@@ -43,7 +46,7 @@ jobs:
         title: 'build(deps): upgrade uv.lock'
         commit-message: 'build(deps): upgrade upgrade uv.lock'
         body: |
-          Monthly scheduled upgrade of uv.lock (`uv lock --upgrade --exclude-newer="1 week"`).
+          Monthly scheduled upgrade of uv.lock (`uv lock --upgrade`).
 
           > [!NOTE]
           > Mark this PR as "ready for review" to trigger additional checks.
