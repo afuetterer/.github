@@ -30,13 +30,13 @@ repos:
     args: [--autofix, --indent=2]
 
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: ed81924a8b1cecdaa570b072528fa80c9c4d6ccd  # frozen: 0.37.1
+  rev: 943377262562a12b57292fc98fabd7dbf81451fe  # frozen: 0.37.2
   hooks:
   - id: check-dependabot
   - id: check-github-workflows
 
 - repo: https://github.com/rvben/rumdl-pre-commit
-  rev: 916d85f452acfb1f57123538315a130f34fb5a21  # frozen: v0.1.67
+  rev: 5db5f54bd3645bf9fecd8a56c052b9208b2d478d  # frozen: v0.1.87
   hooks:
   - id: rumdl-fmt
     args:
@@ -45,7 +45,7 @@ repos:
     exclude: .github/PULL_REQUEST_TEMPLATE.md
 
 - repo: https://github.com/crate-ci/typos
-  rev: f06b85043a5ab470afbb0a5592456e733243983a  # frozen: v1
+  rev: a90d2a917d59472bef788897931c1a5a5d12870a  # frozen: v1
   hooks:
   - id: typos
     args: [--force-exclude]
