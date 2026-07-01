@@ -24,13 +24,13 @@ repos:
     args: [--autofix, --indent=2]
 
 - repo: https://github.com/python-jsonschema/check-jsonschema
-  rev: f805888065fdb6162e1f800e50bb9460cbd223d6  # frozen: 0.37.2
+  rev: 5030dca3047414c338091455ac41803200ec1f0f  # frozen: 0.37.3
   hooks:
   - id: check-dependabot
   - id: check-github-workflows
 
 - repo: https://github.com/rvben/rumdl-pre-commit
-  rev: 159fea737c2a99ddb1758031f96e95ad59c109a2  # frozen: v0.2.4
+  rev: 0bc55c40f85efa6234cf801d82e8da5bc0ef0b7c  # frozen: v0.2.22
   hooks:
   - id: rumdl-fmt
     args:
